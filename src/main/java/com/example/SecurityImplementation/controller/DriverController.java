@@ -2,6 +2,7 @@ package com.example.SecurityImplementation.controller;
 
 import com.example.SecurityImplementation.entity.Driver;
 import com.example.SecurityImplementation.service.DriverService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,29 +16,32 @@ public class DriverController
     @Autowired
     private DriverService service;
 
-@PostMapping("/save")
+    @PostMapping("/save")
     public Driver SaveDriver(@RequestBody Driver driver)
-{
-return service.SaveDriver(driver);
-}
+    {
+        return service.SaveDriver(driver);
+    }
 
-@GetMapping("/fetchall")
+    @GetMapping("/fetchall")
     public List<Driver> fetchall()
-{
-    return service.fetchalldriver();
-}
+    {
+        return service.fetchalldriver();
+    }
 
-@PutMapping("/modify/{id}")
+    @PutMapping("/modify/{id}")
     public ResponseEntity<Driver> ModifyDriver(@RequestBody Driver driver, @PathVariable int id)
-{
-    return service.updateDriver(driver,id);
+    {
+        return service.updateDriver(driver,id);
 
-}
+    }
 
-@DeleteMapping("/delete.{id}")
-public ResponseEntity<String> RemoveDriver(@PathVariable int id)
-{
+    @DeleteMapping("/delete.{id}")
+    public ResponseEntity<String> RemoveDriver(@PathVariable int id) {
+        if (service.removeDriver(id)) {
+            return ResponseEntity.ok("deleted Successfully");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
 
-}
-
+    }
 }

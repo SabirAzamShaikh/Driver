@@ -41,6 +41,19 @@ public class DriverService
             return ResponseEntity.notFound().build();
         }
     }
+    public boolean removeDriver(int id)
+    {
+        if(repo.existsById(id)) {
+            repo.deleteById(id);
+            return  true;
+        }
+        else
+        {
+            return
+                    false;
+        }
+    }
+
 
 
 
