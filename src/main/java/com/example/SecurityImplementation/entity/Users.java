@@ -1,29 +1,24 @@
 package com.example.SecurityImplementation.entity;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.antlr.v4.runtime.misc.NotNull;
-
-import java.util.List;
 
 @Entity
-public class User
+public class Users
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
     private String username;
-    @NotNull
     private String password;
-    private List<String> roles;
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Users{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 
@@ -35,14 +30,6 @@ public class User
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -51,11 +38,11 @@ public class User
         this.password = password;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
